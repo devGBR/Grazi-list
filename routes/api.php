@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TarefasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/todo', [TarefasController::class, 'index']);
+
+Route::post('/create-aba', [TarefasController::class, 'createAba']);
+Route::post('/create-tarefa', [TarefasController::class, 'store']);
+
+Route::get('/completar-task/{id}' , [TarefasController::class, 'completarTask']);
+Route::get('/refazer-task/{id}' , [TarefasController::class, 'refazerTask']);
+
+Route::get('/excluir-task/{id}' , [TarefasController::class, 'deleteTask']);
+Route::get('/excluir-aba/{id}' , [TarefasController::class, 'deleteAba']);
+
